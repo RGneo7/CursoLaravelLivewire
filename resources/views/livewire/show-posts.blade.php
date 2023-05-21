@@ -3,9 +3,13 @@
     <!-- component -->
     <x-table>
         <div class="px-6 py-4">
-            <input type="text" name="" id="" wire:model="search">
+            {{-- <input type="text" name="" id="" wire:model="search"> --}}
+            <x-input class="w-full" wire:model="search" type="text" placeholder="Que quiere buscar?">
+
+            </x-input>
         </div>
 
+        @if ($posts->count())
         <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
             <thead class="bg-gray-50">
                 <tr>
@@ -50,5 +54,10 @@
                 @endforeach
             </tbody>
         </table>
+        @else
+            <div class="px-4 py-4">
+                No existe ningun registro que coincida con la busqueda {{ $search }}.
+            </div>
+        @endif
     </x-table>
 </div>
