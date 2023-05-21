@@ -13,9 +13,9 @@
         <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
             <thead class="bg-gray-50">
                 <tr>
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">Id</th>
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">Title</th>
-                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">Content</th>
+                    <th scope="col" class="cursor-pointer px-6 py-4 font-medium text-gray-900">Id</th>
+                    <th scope="col" class="cursor-pointer px-6 py-4 font-medium text-gray-900">Title</th>
+                    <th scope="col" class="cursor-pointer px-6 py-4 font-medium text-gray-900">Content</th>
                     <th scope="col" class="px-6 py-4 font-medium text-gray-900"></th>
                 </tr>
             </thead>
