@@ -2,11 +2,10 @@
     {{-- Do your work, then step back. --}}
     <!-- component -->
     <x-table>
-        <div class="px-6 py-4">
+        <div class="px-6 py-4 flex item-center">
             {{-- <input type="text" name="" id="" wire:model="search"> --}}
-            <x-input class="w-full" wire:model="search" type="text" placeholder="Que quiere buscar?">
-
-            </x-input>
+            <x-input class="flex-1 mr-4" wire:model="search" type="text" placeholder="Que quiere buscar?"></x-input>
+            @livewire('create-post')
         </div>
 
         @if ($posts->count())
