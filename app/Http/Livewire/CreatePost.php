@@ -7,7 +7,7 @@ use App\Models\Post;
 
 class CreatePost extends Component
 {
-    public $open=false;
+    public $open=true;
     public $title, $content;
 
     protected $rules= [
@@ -15,10 +15,10 @@ class CreatePost extends Component
         'content' => 'required|min:10'
     ];
 
-    // nos permite comprobar que se cumple la regla establecida en rules en tiempo real
-    public function updated($propertyName){
-        $this->validateOnly($propertyName);
-    }
+    // // nos permite comprobar que se cumple la regla establecida en rules en tiempo real
+    // public function updated($propertyName){
+    //     $this->validateOnly($propertyName);
+    // }
 
     public function render()
     {

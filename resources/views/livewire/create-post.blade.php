@@ -16,13 +16,15 @@
             </div>
             <div class="mb-4">
                 <x-label value="Contenido del post"></x-label>
-                <textarea name="" id="" cols="30" rows="6" class="w-full form-control" wire:modelq="content"></textarea>
+                <textarea name="" id="" cols="30" rows="6" class="w-full form-control" wire:model="content"></textarea>
                 <x-input-error for="content"></x-input-error>
             </div>
         </x-slot>
         <x-slot name="footer">
             <x-secondary-button wire:click="$set('open', false)">Cancelar</x-secondary-button>
-            <x-danger-button wire:click="save">Crear Post</x-danger-button>
+            <x-danger-button wire:click="save" wire:loading.class="bg-blue-500" wire:target="save">Crear Post</x-danger-button>
+            {{-- <x-danger-button wire:click="save" wire:loading.remove wire:target="save">Crear Post</x-danger-button>
+            <span wire:loading wire:target="save">Cargando...</span> --}}
         </x-slot>
     </x-dialog-modal>
 </div>
