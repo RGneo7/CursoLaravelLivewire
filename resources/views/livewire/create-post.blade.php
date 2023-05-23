@@ -8,7 +8,7 @@
             Crear nuevo post
         </x-slot>
         <x-slot name="content">
-            <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <div wire:loading wire:targe="image" class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                 <strong class="font-bold">Cargando imagen!</strong>
                 <span class="block sm:inline">Espere un momento, procesando imagen.</span>
               </div>
@@ -30,14 +30,15 @@
             </div>
 
             <div class="mb-4">
-                <input type="file" name="" id="" wire:model="image">
+                <input type="file" name="" id="{{ $identificador }}" wire:model="image">
                 <x-input-error for="image"></x-input-error>
             </div>
         </x-slot>
 
         <x-slot name="footer">
             <x-secondary-button wire:click="$set('open', false)">Cancelar</x-secondary-button>
-            <x-danger-button wire:click="save" wire:loading.class="bg-blue-500" wire:target="save">Crear Post</x-danger-button>
+            <x-danger-button wire:click="save" wire:loading.attr="disabled" wire:target="save, image" class="disabled:opacity-25">Crear Post</x-danger-button>
+            {{-- <x-danger-button wire:click="save" wire:loading.class="bg-blue-500" wire:target="save">Crear Post</x-danger-button> --}}
             {{-- <x-danger-button wire:click="save" wire:loading.remove wire:target="save">Crear Post</x-danger-button>
             <span wire:loading wire:target="save">Cargando...</span> --}}
         </x-slot>

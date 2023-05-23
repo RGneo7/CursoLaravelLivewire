@@ -11,7 +11,11 @@ class CreatePost extends Component
     use WithFileUploads;
 
     public $open=true;
-    public $title, $content, $image;
+    public $title, $content, $image, $identificador;
+
+    public function mount(){
+        $this->identificador=rand();
+    }
 
     protected $rules= [
         'title' => 'required|max:100',
@@ -31,12 +35,19 @@ class CreatePost extends Component
 
     public function save(){
         $this->validate();
+
+        $image=$this->image->store('posts');
+
         Post::create([
             'title' => $this->title,
-            'content' => $this->content
+            'content' => $this->content,
+            'image' => $image
         ]);
         // devolvemos los vlores a los que estan por defecto
-        $this->reset(['open', 'title', 'content']);
+        $this->reset(['open', 'title', 'content', 'image']);
+
+        $this->identificador=rand();
+
         // llamamos al metodo render para que guaraddo el nuevo registro este se refleje en la vista
         // $this->emit('render');
         //en caso de especificar cual componente en especifico es el que se desea renderizar
