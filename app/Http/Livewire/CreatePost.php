@@ -4,15 +4,19 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Post;
+use Livewire\WithFileUploads;
 
 class CreatePost extends Component
 {
+    use WithFileUploads;
+
     public $open=true;
-    public $title, $content;
+    public $title, $content, $image;
 
     protected $rules= [
         'title' => 'required|max:100',
-        'content' => 'required|min:10'
+        'content' => 'required|min:10',
+        'image' => 'required|image|max:2048'
     ];
 
     // // nos permite comprobar que se cumple la regla establecida en rules en tiempo real
