@@ -1,4 +1,4 @@
-<div>
+<div wire:init='loadPosts'>
     {{-- Do your work, then step back. --}}
     <!-- component -->
     <x-table>
@@ -18,7 +18,7 @@
             @livewire('create-post')
         </div>
 
-        @if ($posts->count())
+        @if (count($posts))
         <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
             <thead class="bg-gray-50">
                 <tr>
@@ -90,19 +90,19 @@
                 @endforeach
             </tbody>
         </table>
+            @if ($posts->hasPages())
+            {{-- si en num de paginas es mayor a 1 se muestra el siguiente div --}}
+            <div class="px-6 py-3">
+                {{-- este se encarga de mostrar pagindo los resultados (buscar como lo hace xq quede en ls misms jjj) --}}
+                {{ $posts->links() }}
+            </div>
+            @endif
         @else
             <div class="px-4 py-4">
                 No existe ningun registro que coincida con la busqueda {{ $search }}.
             </div>
         @endif
 
-        @if ($posts->hasPages())
-        {{-- si en num de paginas es mayor a 1 se muestra el siguiente div --}}
-        <div class="px-6 py-3">
-            {{-- este se encarga de mostrar pagindo los resultados (buscar como lo hace xq quede en ls misms jjj) --}}
-            {{ $posts->links() }}
-        </div>
-        @endif
     </x-table>
 
     <x-dialog-modal wire:model="open_edit">
@@ -138,4 +138,5 @@
             <x-danger-button wire:click="update" wire:loading.attr="disabled" wire:target="save, image" class="disabled:opacity-25">Actualizar</x-danger-button>
         </x-slot>
     </x-dialog-modal>
+
 </div>

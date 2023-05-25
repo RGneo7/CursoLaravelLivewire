@@ -23,9 +23,9 @@
                 {{-- defer nos sirve pra indicarle a livewire que no es neceseario que renderize la vista --}}
                 <x-input-error for="title"></x-input-error>
             </div>
-            <div class="mb-4">
+            <div class="mb-4" wire:ignore>
                 <x-label value="Contenido del post"></x-label>
-                <textarea name="" id="" cols="30" rows="6" class="w-full form-control" wire:model="content"></textarea>
+                <textarea name="" id="editor" cols="30" rows="6" class="w-full form-control" wire:model="content"></textarea>
                 <x-input-error for="content"></x-input-error>
             </div>
 
@@ -43,4 +43,22 @@
             <span wire:loading wire:target="save">Cargando...</span> --}}
         </x-slot>
     </x-dialog-modal>
+
+    
+    @push('js')
+    {{-- todo lo que definamos dentro de este push se va a cargar en el stack definido en app en layouts --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .then(function(editor){
+                editor.model.document.on('change:data', () => {
+                    @this.set('content', editor.getData());
+                })
+            })
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+    @endpush
 </div>

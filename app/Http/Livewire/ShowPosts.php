@@ -19,6 +19,7 @@ class ShowPosts extends Component
     public $direction="desc";
     public $open_edit=false;
     public $cant='10';
+    public $readyToLoad=false;
 
     protected $listeners=['render' => 'render'];
 
@@ -48,11 +49,20 @@ class ShowPosts extends Component
     {//funcion encargada de renderizar la vista
         // $posts=Post::all();
         // $posts=Post::where('title', 'like', '%' . $this->search . '%');
-        $posts=Post::where('title', 'like', '%' . $this->search . '%')
-        ->orWhere('content', 'like', '%' . $this->search . '%')
-        ->orderBy($this->sort, $this->direction)
-        ->paginate($this->cant);
+        if ($this->readyToLoad) {
+            $posts=Post::where('title', 'like', '%' . $this->search . '%')
+            ->orWhere('content', 'like', '%' . $this->search . '%')
+            ->orderBy($this->sort, $this->direction)
+            ->paginate($this->cant);
+        } else {
+            $posts=[];
+        }
+        
         return view('livewire.show-posts', compact('posts'));
+    }
+
+    public function loadPosts(){
+        $this->readyToLoad=true;
     }
 
     public function order($sort){
