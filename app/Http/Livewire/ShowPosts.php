@@ -21,7 +21,7 @@ class ShowPosts extends Component
     public $cant='10';
     public $readyToLoad=false;
 
-    protected $listeners=['render' => 'render'];
+    protected $listeners=['render', 'delete'];
 
     public $queryString = [
         'cant' => ['except' => '10'],
@@ -97,5 +97,9 @@ class ShowPosts extends Component
         $this->identificador=rand();
         // $this->emitTo('show-posts', 'render');
         $this->emit('alert', 'El post se actualizo satisfactoriamente.');
+    }
+
+    public function delete(Post $post){
+        $post->delete();
     }
 }

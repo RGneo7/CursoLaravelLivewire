@@ -84,6 +84,9 @@
                                 <a class="btn btn-green" wire:click="edit({{ $item }})">
                                     <i class="fas fa-edit"></i>
                                 </a>
+                                <a class="btn btn-red" wire:click="$emit('deletePost', {{ $item }})">
+                                    <i class="fas fa-trash"></i>
+                                </a>
                             </div>
                         </td>
                     </tr>
@@ -139,4 +142,32 @@
         </x-slot>
     </x-dialog-modal>
 
+    @push('js')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+            livewire.on('deletePost', postId => {
+                Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+
+                    livewire.emitTo('show-posts', 'delete', postId);
+
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+              })
+            })
+        </script>
+    @endpush
 </div>
