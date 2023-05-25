@@ -14,13 +14,20 @@ class ShowPosts extends Component
     use WithFileUploads;
     use WithPagination;
 
-    public $search, $post, $image, $identificador;
+    public $search='', $post, $image, $identificador;
     public $sort="id";
     public $direction="desc";
     public $open_edit=false;
-    public $cant=10;
+    public $cant='10';
 
     protected $listeners=['render' => 'render'];
+
+    public $queryString = [
+        'cant' => ['except' => '10'],
+        'sort' => ['except' => 'id'],
+        'direction' => ['except' => 'desc'],
+        'search' => ['except' => '']
+    ];
 
     public function mount(Post $post){
         $this->post=$post;
