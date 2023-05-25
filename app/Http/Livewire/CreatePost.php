@@ -4,16 +4,18 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Post;
+//para la carga de imagenes
 use Livewire\WithFileUploads;
 
 class CreatePost extends Component
 {
     use WithFileUploads;
 
-    public $open=true;
+    public $open=false;
     public $title, $content, $image, $identificador;
 
     public function mount(){
+        //lo siguiente es para definir que le agregue un valor aleatorio cn la intencion de obligar al renderizado a cambiar el valor por defecto del conponente de carga de imagen
         $this->identificador=rand();
     }
 
