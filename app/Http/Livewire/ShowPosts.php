@@ -12,6 +12,7 @@ use Livewire\WithPagination;
 class ShowPosts extends Component
 {
     use WithFileUploads;
+    use WithPagination;
 
     public $search, $post, $image, $identificador;
     public $sort="id";
@@ -24,6 +25,10 @@ class ShowPosts extends Component
         $this->post=$post;
         //lo siguiente es para definir que le agregue un valor aleatorio cn la intencion de obligar al renderizado a cambiar el valor por defecto del conponente de carga de imagen
         $this->identificador=rand();
+    }
+
+    public function updatingSearch(){
+        $this->resetPage();
     }
 
     protected $rules = [
