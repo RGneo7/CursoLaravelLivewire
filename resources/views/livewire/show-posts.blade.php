@@ -85,6 +85,14 @@
                 No existe ningun registro que coincida con la busqueda {{ $search }}.
             </div>
         @endif
+
+        @if ($posts->hasPages())
+        {{-- si en num de paginas es mayor a 1 se muestra el siguiente div --}}
+        <div class="px-6 py-3">
+            {{-- este se encarga de mostrar pagindo los resultados (buscar como lo hace xq quede en ls misms jjj) --}}
+            {{ $posts->links() }}
+        </div>
+        @endif
     </x-table>
 
     <x-dialog-modal wire:model="open_edit">

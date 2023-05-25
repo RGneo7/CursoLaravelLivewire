@@ -7,6 +7,7 @@ use Livewire\Component;
 //para la carga de imagenes
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Livewire\WithPagination;
 
 class ShowPosts extends Component
 {
@@ -31,13 +32,13 @@ class ShowPosts extends Component
     ];
 
     public function render()
-    {
+    {//funcion encargada de renderizar la vista
         // $posts=Post::all();
         // $posts=Post::where('title', 'like', '%' . $this->search . '%');
         $posts=Post::where('title', 'like', '%' . $this->search . '%')
         ->orWhere('content', 'like', '%' . $this->search . '%')
         ->orderBy($this->sort, $this->direction)
-        ->get();
+        ->paginate(10);
         return view('livewire.show-posts', compact('posts'));
     }
 
