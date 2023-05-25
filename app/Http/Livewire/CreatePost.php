@@ -38,7 +38,7 @@ class CreatePost extends Component
     public function save(){
         $this->validate();
 
-        $image=$this->image->store('posts');
+        $image=$this->image->store('public/storage/posts');
 
         Post::create([
             'title' => $this->title,
@@ -55,5 +55,13 @@ class CreatePost extends Component
         //en caso de especificar cual componente en especifico es el que se desea renderizar
         $this->emitTo('show-posts', 'render');
         $this->emit('alert', 'El post se creo satisfactoriamente.');
+    }
+
+    public function updatingOpen(){
+        if($this->open==false){
+            $this->reset(['title', 'content', 'image']);
+            $this->identificador=rand();
+            $this->emit('resetCKEditor');
+        } 
     }
 }

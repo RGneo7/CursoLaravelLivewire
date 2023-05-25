@@ -23,9 +23,11 @@
                 {{-- defer nos sirve pra indicarle a livewire que no es neceseario que renderize la vista --}}
                 <x-input-error for="title"></x-input-error>
             </div>
-            <div class="mb-4" wire:ignore>
+            <div class="mb-4">
                 <x-label value="Contenido del post"></x-label>
-                <textarea name="" id="editor" cols="30" rows="6" class="w-full form-control" wire:model="content"></textarea>
+                <div wire:ignore>
+                    <textarea name="" id="editor" cols="30" rows="6" class="w-full form-control" wire:model="content"></textarea>
+                </div>
                 <x-input-error for="content"></x-input-error>
             </div>
 
@@ -54,7 +56,10 @@
             .then(function(editor){
                 editor.model.document.on('change:data', () => {
                     @this.set('content', editor.getData());
-                })
+                });
+                livewire.on('resetCKEditor', () =>{
+                    editor.setData('');
+                });
             })
             .catch( error => {
                 console.error( error );

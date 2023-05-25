@@ -70,7 +70,7 @@
                                 {{ $item->title }}
                             </span>
                         </td>
-                        <td class="px-6 py-4">{{ $item->content }}</td>
+                        <td class="px-6 py-4">{!! html_entity_decode($item->content) !!}</td>
                         <td class="px-6 py-4">
                             <div class="flex justify-end gap-4">
                                 {{-- <a x-data="{ tooltip: 'Delete' }" href="#">
@@ -120,8 +120,8 @@
 
             @if ($image)
                 <img src="{{ $image->temporaryUrl() }}" alt="">
-            @else
-              <img src="{{ Storage::url($post->image) }}" alt="">
+            @elseif ($post->image)
+                <img src="{{ Storage::url($post->image) }}" alt="">
             @endif
             <div class="mb-4">
                 <x-label value="Titulo"></x-label>

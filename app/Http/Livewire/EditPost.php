@@ -24,7 +24,7 @@ class EditPost extends Component
         if ($this->image) {//si existia una imagen ya en este post
             Storage::delete([$this->post->image]);//elimino
 
-            $this->post->image = $this->image->store('posts');//y reemplazo por la nueva
+            $this->post->image = $this->image->store('public/storage/posts');//y reemplazo por la nueva
         }
         $this->post->save();
         $this->reset(['open', 'image']);
