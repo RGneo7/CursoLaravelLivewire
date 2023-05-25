@@ -18,6 +18,7 @@ class ShowPosts extends Component
     public $sort="id";
     public $direction="desc";
     public $open_edit=false;
+    public $cant=10;
 
     protected $listeners=['render' => 'render'];
 
@@ -43,7 +44,7 @@ class ShowPosts extends Component
         $posts=Post::where('title', 'like', '%' . $this->search . '%')
         ->orWhere('content', 'like', '%' . $this->search . '%')
         ->orderBy($this->sort, $this->direction)
-        ->paginate(10);
+        ->paginate($this->cant);
         return view('livewire.show-posts', compact('posts'));
     }
 

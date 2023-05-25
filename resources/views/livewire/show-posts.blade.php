@@ -3,8 +3,18 @@
     <!-- component -->
     <x-table>
         <div class="px-6 py-4 flex item-center">
+            <div class="flex items-center">
+                <span>Mostrar</span>
+                <select wire:model="cant" name="" id="" class="mx-2 form-control">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                <span>Entradas</span>
+            </div>
             {{-- <input type="text" name="" id="" wire:model="search"> --}}
-            <x-input class="flex-1 mr-4" wire:model="search" type="text" placeholder="Que quiere buscar?"></x-input>
+            <x-input class="flex-1 mx-4" wire:model="search" type="text" placeholder="Que quiere buscar?"></x-input>
             @livewire('create-post')
         </div>
 
